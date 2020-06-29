@@ -72,13 +72,15 @@ def AllMaskStoreInfo():
     return mask_store_info_dt
 
 
-
+my_info_df = AllMaskStoreInfo()
 
 
 save_csv= AllMaskStoreInfo()
-save_csv.to_csv("All_MaskStore_Info.csv", index=False)
-
-date_for_draw = mask_store_info_dt.loc [:, ['name', 'lat', 'lng']]
+my_info_df.to_csv("mask_store_info.csv", index=False)
 
 
-print(date_for_draw)
+data_for_draw = my_info_df.loc[:, ['name', 'latitude', 'longitude']]
+
+
+
+data_for_draw

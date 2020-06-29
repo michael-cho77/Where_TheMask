@@ -2,6 +2,8 @@ import requests
 import json
 from tqdm import tqdm
 import pandas as pd
+import folium
+from folium.plugins import MarkerCluster, MiniMap
 
 
 url = "https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/stores/json?page=1"
@@ -9,7 +11,6 @@ url = "https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/stores/json?page=1"
 req = requests.get(url)
 
 json = req.json()
-print(json)
 
 
 def AllMaskStoreInfo():
@@ -74,4 +75,10 @@ def AllMaskStoreInfo():
 
 
 
+save_csv= AllMaskStoreInfo()
+save_csv.to_csv("All_MaskStore_Info.csv", index=False)
 
+date_for_draw = mask_store_info_dt.loc [:, ['name', 'lat', 'lng']]
+
+
+print(date_for_draw)

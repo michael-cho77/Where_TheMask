@@ -82,5 +82,21 @@ my_info_df.to_csv("mask_store_info.csv", index=False)
 data_for_draw = my_info_df.loc[:, ['name', 'latitude', 'longitude']]
 
 
+# 결측치 제거  pandas 의 dropna()
+data_for_draw_except_nan = data_for_draw.dropna()
+data_for_draw_except_nan
 
-data_for_draw
+
+# 좌표값으로 지도생성  zoom 의 최대치는 18로 추정 
+map_hs = folium.Map((37.1995439, 126.8311358), zoom_start = 13) 
+mc = MarkerCluster() 
+names = list(data_for_draw_except_nan['name']) 
+latitudes = list(data_for_draw_except_nan['latitude']) 
+longitudes = list(data_for_draw_except_nan['longitude']) 
+for i in tqdm(range(len(names))): 
+    mc.add_child(folium.Marker(location = [latitudes[i], longitudes[i]], popup=names[i])) 
+    map_hs.add_child(mc)
+
+map_hs.save("./mask_store.html")
+
+

@@ -89,6 +89,8 @@ data_for_draw_except_nan
 
 # 좌표값으로 지도생성  zoom 의 최대치는 18로 추정 
 map_hs = folium.Map((37.1995439, 126.8311358), zoom_start = 13) 
+
+# MarkerCluster 를 이용하면 가까운 거리의 Marker들을 군집시켜서 해당 건수를 표현
 mc = MarkerCluster() 
 names = list(data_for_draw_except_nan['name']) 
 latitudes = list(data_for_draw_except_nan['latitude']) 
